@@ -1,0 +1,54 @@
+version: "3.8"
+
+name: authentication-app
+
+services:
+  mongodb:
+    image: mongo:7.0.12
+    container_name: auth_mongodb_container
+    restart: always
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - authentication-app
+  api:
+    build:
+      context: ./auth-service
+      target: development
+      dockerfile: Dockerfile
+    container_name: auth_api_container
+    restart: unless-stopped
+    env_file: ./auth-service/.env
+    volumes:
+      - ./auth-service:/app
+      - /app/node_modules
+    networks:
+      - authentication-app
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mongodb
+  frontend:
+    build:
+      context: ./frontend
+      target: development
+      dockerfile: Dockerfile
+    container_name: auth_frontend_container
+    restart: unless-stopped
+    env_file: ./frontend/.env
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    networks:
+      - authentication-app
+    ports:
+      - "5173:5173"
+    depends_on:
+      - api
+volumes:
+  mongo_data:
+networks:
+  authentication-app:
+    driver: bridge

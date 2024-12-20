@@ -1,0 +1,20 @@
+{
+    "language": "En",
+    "appName": "Authentication App",
+    "loginText": "Login",
+    "loginFill": "Enter your email below to login to your account",
+    "emailText": "Email",
+    "passwordText": "Password",
+    "passwordForgot": "Forgot your Password?",
+    "withGoogle": "Login with Google",
+    "withGithub": "Login with Github",
+    "withDiscord": "Login with Discord",
+    "noAccount": "Don't have an account?",
+    "registerText": "Register",
+    "registerFill": "Enter your information to create an account",
+    "passwordConfirmText": "Confirm Password",
+    "rWithGoogle": "Register with Google",
+    "rWithGithub": "Register with Github",
+    "rWithDiscord": "Register with Discord",
+    "hasAccount": "Already have an account?"
+}

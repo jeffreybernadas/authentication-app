@@ -1,0 +1,52 @@
+version: "3.8"
+
+name: authentication-app-prod
+
+services:
+  mongodb:
+    image: mongo:7.0.12
+    container_name: auth_mongodb_container_prod
+    restart: always
+    ports:
+      - "27019:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - authentication-app-prod
+  api:
+    build:
+      context: ./auth-service
+      target: production
+      dockerfile: Dockerfile
+    container_name: auth_api_container_prod
+    restart: unless-stopped
+    ports:
+      - "3002:3002"
+    env_file: ./auth-service/.env
+    volumes:
+      - ./auth-service:/app
+      - /app/node_modules
+    networks:
+      - authentication-app-prod
+    depends_on:
+      - mongodb
+  frontend:
+    build:
+      context: ./frontend
+      target: production
+      dockerfile: Dockerfile
+    container_name: auth_frontend_container_prod
+    restart: unless-stopped
+    env_file: ./frontend/.env
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    networks:
+      - authentication-app-prod
+    depends_on:
+      - api
+volumes:
+  mongo_data:
+networks:
+  authentication-app-prod:
+    driver: bridge

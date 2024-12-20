@@ -1,0 +1,11 @@
+meta {
+  name: Auth Service Get Sessions
+  type: http
+  seq: 11
+}
+
+get {
+  url: {{AUTH_SERVICE_V1}}/session/
+  body: json
+  auth: none
+}

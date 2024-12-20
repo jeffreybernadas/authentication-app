@@ -1,0 +1,500 @@
+openapi: 3.0.0
+info:
+  title: MS Auth Service API
+  version: 1.0.0
+  description: Authentication Service for my first Microservices
+  contact:
+    name: author
+    email: "jeffrey.bernadas0@gmail.com"
+externalDocs:
+  description: "./swagger.json"
+  url: "/swagger.json"
+servers:
+  - url: http://localhost:3001/ # TODO: change to the production url
+    description: "Auth Service"
+tags:
+  - name: Health Check
+    description: Service health check endpoint
+  - name: Authentication
+    description: Authentication endpoints
+  - name: User
+    description: User endpoints
+  - name: Session
+    description: Session endpoints
+paths:
+  /healthCheck:
+    get:
+      tags:
+        - Health Check
+      security: []
+      summary: Check the health of the Auth Service.
+      responses:
+        200:
+          description: Auth Service is healthy.
+  /api/v1/auth/register:
+    post:
+      tags:
+        - Authentication
+      security: []
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterUserInput"
+      responses:
+        200:
+          description: User is logged in.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RegisterUserResponse"
+        400:
+          description: Bad Request.
+        409:
+          description: Conflict.
+  /api/v1/auth/login:
+    post:
+      tags:
+        - Authentication
+      security: []
+      summary: Login a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginUserInput"
+      responses:
+        200:
+          description: User is logged in.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeneralResponse"
+        400:
+          description: Bad Request.
+  /api/v1/auth/refresh:
+    get:
+      tags:
+        - Authentication
+      security: []
+      summary: Refresh a user's access token
+      responses:
+        200:
+          description: Access token is refreshed.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeneralResponse"
+        401:
+          description: Refresh token is missing, invalid, or session has expired.
+  /api/v1/auth/logout:
+    get:
+      tags:
+        - Authentication
+      security: []
+      summary: Logout a user
+      responses:
+        200:
+          description: User is logged out.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeneralResponse"
+        401:
+          description: Not authenticated.
+  /api/v1/auth/email/verify/{code}:
+    get:
+      tags:
+        - Authentication
+      security: []
+      summary: Verify email
+      parameters:
+        - in: path
+          name: code
+          schema:
+            type: string
+          required: true
+          description: Verification code id.
+      responses:
+        200:
+          description: Email verified successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeneralResponse"
+        404:
+          description: Invalid or expired verification code.
+        500:
+          description: Failed to verify email.
+  /api/v1/auth/password/forgot:
+    post:
+      tags:
+        - Authentication
+      security: []
+      summary: Send email request to reset password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PasswordForgotInput"
+      responses:
+        200:
+          description: Password reset email sent.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeneralResponse"
+        404:
+          description: User not found.
+        429:
+          description: Too many requests, please try again later.
+        500:
+          description: It's not you, it's us. Try again later.
+  /api/v1/auth/password/reset:
+    post:
+      tags:
+        - Authentication
+      security: []
+      summary: Reset password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PasswordResetInput"
+      responses:
+        200:
+          description: Password reset successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeneralResponse"
+        404:
+          description: Invalid or expired verification code.
+        500:
+          description: Failed to reset password.
+  /api/v1/user/me:
+    get:
+      tags:
+        - User
+      summary: Return data of currently logged in User based on cookie.
+      responses:
+        200:
+          description: Returned logged in user data successfully.
+        401:
+          description: Not authenticated.
+  /api/v1/user:
+    get:
+      tags:
+        - User
+      summary: Return list of users in array format.
+      parameters:
+        - in: query
+          name: _id
+          schema:
+            type: string
+            example: "66d3d6686090c8227502fa78"
+          description: Filter by _id.
+        - in: query
+          name: email
+          schema:
+            type: string
+            example: "sample@test.com"
+          description: Filter by email.
+        - in: query
+          name: verified
+          schema:
+            type: boolean
+            example: true
+          description: Filter by verified.
+        - in: query
+          name: createdAt
+          schema:
+            type: string
+            example: "2024-09-01T02:50:16.518Z"
+          description: Filter by createdAt.
+        - in: query
+          name: updatedAt
+          schema:
+            type: string
+            example: "2024-09-01T02:51:58.138Z"
+          description: Filter by updatedAt.
+        - in: query
+          name: sort
+          schema:
+            type: string
+            example: "email desc"
+          description: Sorting criteria in the format of field direction (asc for ascending, desc for descending).
+        - in: query
+          name: fields
+          schema:
+            type: string
+            example: "name,email"
+          description: Comma-separated list of fields to include in the response.
+        - in: query
+          name: page
+          schema:
+            type: integer
+            example: 1
+          description: The page number for pagination (default is 1).
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            example: 10
+          description: The number of items per page (default is 10).
+      responses:
+        200:
+          description: Returned users data successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetUsersResponse"
+        401:
+          description: Not authenticated.
+        404:
+          description: No users found.
+  /api/v1/session:
+    get:
+      tags:
+        - Session
+      security: []
+      summary: Retrieve all user sessions
+      responses:
+        200:
+          description: Sessions retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetSessionsResponse"
+        401:
+          description: Not authenticated.
+        404:
+          description: No sessions found.
+  /api/v1/session/{id}:
+    delete:
+      tags:
+        - Session
+      security: []
+      summary: Delete a user session
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Session id.
+      responses:
+        200:
+          description: Session deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeneralResponse"
+        404:
+          description: Session not found.
+components:
+  schemas:
+    LoginUserInput:
+      type: object
+      required:
+        - email
+        - password
+      optional:
+        - userAgent
+      properties:
+        email:
+          type: string
+          default: jane.doe@example.com
+        password:
+          type: string
+          default: Password!23
+        userAgent:
+          type: string
+          default: Chrome/58.0.3029.110 Safari/537.3
+    RegisterUserInput:
+      type: object
+      required:
+        - email
+        - password
+        - confirmPassword
+      optional:
+        - userAgent
+      properties:
+        email:
+          type: string
+          default: jane.doe@example.com
+        password:
+          type: string
+          default: Password!23
+        confirmPassword:
+          type: string
+          default: Password!23
+        userAgent:
+          type: string
+          default: Chrome/58.0.3029.110 Safari/537.3
+    RegisterUserResponse:
+      type: object
+      properties:
+        service:
+          type: string
+        appVersion:
+          type: string
+        method:
+          type: string
+        status:
+          type: number
+        timestamp:
+          type: string
+        responseTime:
+          type: string
+        url:
+          type: string
+        data:
+          type: object
+          properties:
+            email:
+              type: string
+            verified:
+              type: string
+            _id:
+              type: string
+            createdAt:
+              type: string
+            updatedAt:
+              type: string
+            __v:
+              type: number
+    PasswordForgotInput:
+      type: object
+      required:
+        - email
+      properties:
+        email:
+          type: string
+          default: jane.doe@example.com
+    PasswordResetInput:
+      type: object
+      required:
+        - verificationCode
+        - password
+      properties:
+        verificationCode:
+          type: string
+          default: 66d9555e0b5401e3d406c700
+        password:
+          type: string
+          default: newPass!23
+    GetUsersResponse:
+      type: object
+      properties:
+        service:
+          type: string
+        appVersion:
+          type: string
+        method:
+          type: string
+        status:
+          type: number
+        timestamp:
+          type: string
+        responseTime:
+          type: string
+        url:
+          type: string
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              totalCount:
+                type: number
+              page:
+                type: number
+              limit:
+                type: number
+              users:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                  email:
+                    type: string
+                  verified:
+                    type: string
+                  createdAt:
+                    type: string
+                  updatedAt:
+                    type: string
+                  __v:
+                    type: number
+    GetSessionsResponse:
+      type: object
+      properties:
+        service:
+          type: string
+        appVersion:
+          type: string
+        method:
+          type: string
+        status:
+          type: number
+        timestamp:
+          type: string
+        responseTime:
+          type: string
+        url:
+          type: string
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+              userAgent:
+                type: string
+              createdAt:
+                type: string
+              isCurrent:
+                type: boolean
+    GeneralResponse:
+      type: object
+      properties:
+        service:
+          type: string
+        appVersion:
+          type: string
+        method:
+          type: string
+        status:
+          type: number
+        timestamp:
+          type: string
+        responseTime:
+          type: string
+        url:
+          type: string
+        data:
+          type: object
+          properties:
+            message:
+              type: string
+  securitySchemes:
+    accessTokenCookie:
+      type: "apiKey"
+      in: "cookie"
+      name: "accessToken"
+      bearerFormat: "JWT"
+    refreshTokenCookie:
+      type: "apiKey"
+      in: "cookie"
+      name: "refreshToken"
+      bearerFormat: "JWT"
+security:
+  accessTokenCookie: []
+  refreshTokenCookie: []

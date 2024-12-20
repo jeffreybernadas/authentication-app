@@ -1,0 +1,15 @@
+meta {
+  name: Auth Service Delete Session
+  type: http
+  seq: 12
+}
+
+delete {
+  url: {{AUTH_SERVICE_V1}}/session/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 6707acd3f2ea8cdf82e61d6c
+}

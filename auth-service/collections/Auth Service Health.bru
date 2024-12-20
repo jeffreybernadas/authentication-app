@@ -1,0 +1,11 @@
+meta {
+  name: Auth Service Health
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{AUTH_SERVICE_V1}}/auth/healthCheck
+  body: none
+  auth: none
+}

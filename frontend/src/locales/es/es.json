@@ -1,0 +1,20 @@
+{
+    "language": "Es",
+    "appName": "Aplicación de autenticación",
+    "loginText": "Acceso",
+    "loginFill": "Ingrese su correo electrónico a continuación para iniciar sesión en su cuenta",
+    "emailText": "Correo electrónico",
+    "passwordText": "Contraseña",
+    "passwordForgot": "¿Olvidaste tu contraseña?",
+    "withGoogle": "Iniciar sesión con Google",
+    "withGithub": "Iniciar sesión con Github",
+    "withDiscord": "Iniciar sesión con Discord",
+    "noAccount": "¿No tienes una cuenta?",
+    "registerText": "Registro",
+    "registerFill": "Ingresa tus datos para crear una cuenta",
+    "passwordConfirmText": "Confirmar Contraseña",
+    "rWithGoogle": "Regístrate en Google",
+    "rWithGithub": "Regístrate en Github",
+    "rWithDiscord": "Regístrate en Discord",
+    "hasAccount": "¿Ya tienes una cuenta?"
+}

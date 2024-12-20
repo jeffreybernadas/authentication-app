@@ -1,0 +1,11 @@
+meta {
+  name: Auth Service Logout
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{AUTH_SERVICE_V1}}/auth/logout
+  body: json
+  auth: none
+}

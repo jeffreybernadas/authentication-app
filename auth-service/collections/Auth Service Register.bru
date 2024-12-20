@@ -1,0 +1,19 @@
+meta {
+  name: Auth Service Register
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{AUTH_SERVICE_V1}}/auth/register
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "email": "sample2@test.com",
+      "password": "123123",
+      "confirmPassword": "123123"
+  }
+}

@@ -1,0 +1,11 @@
+meta {
+  name: Auth Service Get Me
+  type: http
+  seq: 9
+}
+
+get {
+  url: {{AUTH_SERVICE_V1}}/user/me
+  body: json
+  auth: none
+}

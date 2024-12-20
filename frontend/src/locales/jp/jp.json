@@ -1,0 +1,20 @@
+{
+    "language": "Jp",
+    "appName": "認証アプリ",
+    "loginText": "ログイン",
+    "loginFill": "以下にメールアドレスを入力してアカウントにログインしてください",
+    "emailText": "電子メール",
+    "passwordText": "パスワード",
+    "passwordForgot": "パスワードをお忘れですか？",
+    "withGoogle": "Google でログイン",
+    "withGithub": "Github でログイン",
+    "withDiscord": "Discord でログイン",
+    "noAccount": "アカウントをお持ちでない場合は？",
+    "registerText": "登録する",
+    "registerFill": "情報を入力してアカウントを作成します",
+    "passwordConfirmText": "パスワードを認証する",
+    "rWithGoogle": "Google に登録する",
+    "rWithGithub": "Github に登録する",
+    "rWithDiscord": "Discord に登録する",
+    "hasAccount": "すでにアカウントをお持ちですか?"
+}

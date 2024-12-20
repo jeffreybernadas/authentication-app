@@ -1,0 +1,15 @@
+meta {
+  name: Auth Service Verify Email
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{AUTH_SERVICE_V1}}/auth/email/verify/:code
+  body: none
+  auth: none
+}
+
+params:path {
+  code: 66d3d6686090c8227502fa7a
+}

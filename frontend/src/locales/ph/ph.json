@@ -1,0 +1,20 @@
+{
+    "language": "Ph",
+    "appName": "Autenticasyon na Aplikasyon",
+    "loginText": "Mag-login",
+    "loginFill": "Ilagay ang iyong email sa ibaba upang mag-login sa iyong account",
+    "emailText": "Email",
+    "passwordText": "Password",
+    "passwordForgot": "Nakalimutan ang iyong Password?",
+    "withGoogle": "Mag-login gamit ang Google",
+    "withGithub": "Mag-login gamit ang Github",
+    "withDiscord": "Mag-login gamit ang Discord",
+    "noAccount": "Wala pang account?",
+    "registerText": "Rehistro",
+    "registerFill": "Ilagay ang iyong impormasyon para makagawa ng account",
+    "passwordConfirmText": "Kumpirmahin ang Password",
+    "rWithGoogle": "Magrehistro gamit ang Google",
+    "rWithGithub": "Magrehistro gamit ang Github",
+    "rWithDiscord": "Magrehistro gamit ang Discord",
+    "hasAccount": "May account na?"
+}

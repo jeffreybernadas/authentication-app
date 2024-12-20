@@ -1,0 +1,25 @@
+meta {
+  name: Auth Service Get Users
+  type: http
+  seq: 10
+}
+
+get {
+  url: {{AUTH_SERVICE_V1}}/user?email=""
+  body: json
+  auth: none
+}
+
+params:query {
+  email: ""
+  ~limit: 10
+  ~page: 2
+  ~filter[verified]: true
+  ~filter[email]: sa
+  ~sort: email asc
+  ~fields: password,createdAt
+  ~verified: true
+  ~createdAt: 2024-09-01T02:50:16.518Z
+  ~_id: 66d3d6686090c8227502fa78
+  ~filter[createdAt]: 2024-09-01T02:50:16.518Z
+}
