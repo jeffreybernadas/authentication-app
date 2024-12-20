@@ -242,6 +242,7 @@ export const createUserAndCreateSession = async (
   userData: UserDocument,
   userAgent?: string,
 ) => {
+  const origin = NODE_ENV === "development" ? APP_ORIGIN_DEV : APP_ORIGIN;
   // Create verification code
   const verificationCode = await VerificationCodeModel.create({
     userId: userData._id,

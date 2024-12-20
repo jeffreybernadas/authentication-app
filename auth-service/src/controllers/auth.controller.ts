@@ -27,8 +27,6 @@ import SessionModel from "../models/session.model";
 import appAssert from "../utils/appAssert.util";
 import { UserReq } from "../strategies/discord.strategy";
 
-const origin = NODE_ENV === "development" ? APP_ORIGIN_DEV : APP_ORIGIN;
-
 export const registerHandler = catchErrors(async (req, res) => {
   // Validate request
   const request = registerSchema.parse({
@@ -118,6 +116,7 @@ export const passwordResetHandler = catchErrors(async (req, res) => {
 
 export const discordHandler = catchErrors(async (req, res) => {
   const { accessToken, refreshToken } = req.user as UserReq;
+  const origin = NODE_ENV === "development" ? APP_ORIGIN_DEV : APP_ORIGIN;
   return setAuthCookies({ res, accessToken, refreshToken })
     .status(OK)
     .redirect(`${origin}/`);
@@ -125,6 +124,7 @@ export const discordHandler = catchErrors(async (req, res) => {
 
 export const googleHandler = catchErrors(async (req, res) => {
   const { accessToken, refreshToken } = req.user as UserReq;
+  const origin = NODE_ENV === "development" ? APP_ORIGIN_DEV : APP_ORIGIN;
   return setAuthCookies({ res, accessToken, refreshToken })
     .status(OK)
     .redirect(`${origin}/`);
@@ -132,6 +132,7 @@ export const googleHandler = catchErrors(async (req, res) => {
 
 export const facebookHandler = catchErrors(async (req, res) => {
   const { accessToken, refreshToken } = req.user as UserReq;
+  const origin = NODE_ENV === "development" ? APP_ORIGIN_DEV : APP_ORIGIN;
   return setAuthCookies({ res, accessToken, refreshToken })
     .status(OK)
     .redirect(`${origin}/`);
@@ -139,6 +140,7 @@ export const facebookHandler = catchErrors(async (req, res) => {
 
 export const githubHandlerHandler = catchErrors(async (req, res) => {
   const { accessToken, refreshToken } = req.user as UserReq;
+  const origin = NODE_ENV === "development" ? APP_ORIGIN_DEV : APP_ORIGIN;
   return setAuthCookies({ res, accessToken, refreshToken })
     .status(OK)
     .redirect(`${origin}/`);

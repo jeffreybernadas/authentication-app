@@ -21,7 +21,7 @@ services:
     container_name: auth_api_container_prod
     restart: unless-stopped
     ports:
-      - "3002:3002"
+      - "3001:3001"
     env_file: ./auth-service/.env
     volumes:
       - ./auth-service:/app
