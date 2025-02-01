@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
-  title: MS Auth Service API
+  title: Fullstack Authentication App
   version: 1.0.0
-  description: Authentication Service for my first Microservices
+  description: Simple yet follows industry standards Authentication Fullstack App
   contact:
     name: author
     email: "jeffrey.bernadas0@gmail.com"
@@ -11,9 +11,9 @@ externalDocs:
   url: "/swagger.json"
 servers:
   - url: https://auth-api.jeffreybernadas.com/
-    description: "Auth Service Production"
+    description: "API Service Production"
   - url: http://localhost:3001/
-    description: "Auth Service Local"
+    description: "API Service Local"
 tags:
   - name: Health Check
     description: Service health check endpoint
@@ -29,10 +29,10 @@ paths:
       tags:
         - Health Check
       security: []
-      summary: Check the health of the Auth Service.
+      summary: Check the health of the API Service.
       responses:
         200:
-          description: Auth Service is healthy.
+          description: API Service is healthy.
   /api/v1/auth/register:
     post:
       tags:

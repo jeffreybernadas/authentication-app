@@ -24,7 +24,7 @@ export const logger = winston.createLogger({
     json(),
     prettyPrint(),
   ),
-  defaultMeta: { service: `ms-${app.name}`, appVersion: `v${app.version}` },
+  defaultMeta: { service: `${app.name}`, appVersion: `v${app.version}` },
   transports: [
     new transports.Console(),
     new transports.File({ filename: "logs/error.log", level: "error" }),

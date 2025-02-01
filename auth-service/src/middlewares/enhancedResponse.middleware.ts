@@ -20,7 +20,7 @@ const enhancedResponse = (req: Request, res: Response, next: NextFunction) => {
 
     // Add metadata to response body
     const enhancedBody = {
-      service: `ms-${app.name}`,
+      service: `${app.name}`,
       appVersion: `v${app.version}`,
       method,
       status: res.statusCode,
