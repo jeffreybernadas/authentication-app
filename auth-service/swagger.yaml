@@ -10,8 +10,10 @@ externalDocs:
   description: "./swagger.json"
   url: "/swagger.json"
 servers:
-  - url: http://localhost:3001/ # TODO: change to the production url
-    description: "Auth Service"
+  - url: https://auth-api.jeffreybernadas.com/
+    description: "Auth Service Production"
+  - url: http://localhost:3001/
+    description: "Auth Service Local"
 tags:
   - name: Health Check
     description: Service health check endpoint
